@@ -17,7 +17,7 @@ double roundToTenth(double num)
     return floor(num * 10.0 + 0.5) / 10.0;
 }
 
-double roundToHundreths(double num){
+double roundToHundredths(double num){
     return floor(num * 100.0 + 0.5) / 100.0;
 }
 

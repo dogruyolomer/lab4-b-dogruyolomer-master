@@ -10,7 +10,7 @@ d. roundToThousandths(number)
 
 int roundToInteger(double num);
 double roundToTenths(double num);
-double roundToHundreths(double num);
+double roundToHundredths(double num);
 double roundToThousandths(double num);
 
 
