@@ -12,7 +12,7 @@ int roundToInteger(double num)
     return (int)floor(num + 0.5);
 }
 
-double roundToTenth(double num)
+double roundToTenths(double num)
 {
     return floor(num * 10.0 + 0.5) / 10.0;
 }
