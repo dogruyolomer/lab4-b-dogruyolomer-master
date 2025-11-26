@@ -1,0 +1,111 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: IntegerRounding
+      id: integerrounding
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: IntegerRounding
+        setup-command: gcc uts/ut_intheader.c -o ut1
+        command: "./ut1"
+        input: ''
+        expected-output: success
+        comparison-method: exact
+        timeout: 1
+        max-score: 20
+    - name: FloatRounding
+      id: floatrounding
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: FloatRounding
+        setup-command: gcc uts/ut_floatheader.c  -o ut2
+        command: "./ut2"
+        input: ''
+        expected-output: success
+        comparison-method: exact
+        timeout: 1
+        max-score: 20
+    - name: PerfectNumber
+      id: perfectnumber
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: PerfectNumber
+        setup-command: gcc perfect.c -o perfect
+        command: "./perfect"
+        input: '1000'
+        expected-output: 6\s*28\s*496
+        comparison-method: regex
+        timeout: 1
+        max-score: 40
+    - name: Rounding Integer Value
+      id: rounding-integer-value
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Rounding Integer Value
+        setup-command: gcc roundingMain.c rounding.c -o rounding -lm
+        command: "./rounding"
+        input: ''
+        expected-output: 'integer: 3'
+        comparison-method: contains
+        timeout: 1
+        max-score: 5
+    - name: Rounding Tenths Value
+      id: rounding-tenths-value
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Rounding Tenths Value
+        setup-command: ''
+        command: "./rounding"
+        input: ''
+        expected-output: 'tenth: 3.1'
+        comparison-method: contains
+        timeout: 1
+        max-score: 5
+    - name: Rounding Hundredths Value
+      id: rounding-hundredths-value
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Rounding Hundredths Value
+        setup-command: ''
+        command: "./rounding"
+        input: ''
+        expected-output: 'hundredth: 3.14'
+        comparison-method: contains
+        timeout: 1
+        max-score: 5
+    - name: Rounding Thousandths Value
+      id: rounding-thousandths-value
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Rounding Thousandths Value
+        setup-command: ''
+        command: "./rounding"
+        input: ''
+        expected-output: 'thousandth: 3.142'
+        comparison-method: contains
+        timeout: 1
+        max-score: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        INTEGERROUNDING_RESULTS: "${{steps.integerrounding.outputs.result}}"
+        FLOATROUNDING_RESULTS: "${{steps.floatrounding.outputs.result}}"
+        PERFECTNUMBER_RESULTS: "${{steps.perfectnumber.outputs.result}}"
+        ROUNDING-INTEGER-VALUE_RESULTS: "${{steps.rounding-integer-value.outputs.result}}"
+        ROUNDING-TENTHS-VALUE_RESULTS: "${{steps.rounding-tenths-value.outputs.result}}"
+        ROUNDING-HUNDREDTHS-VALUE_RESULTS: "${{steps.rounding-hundredths-value.outputs.result}}"
+        ROUNDING-THOUSANDTHS-VALUE_RESULTS: "${{steps.rounding-thousandths-value.outputs.result}}"
+      with:
+        runners: integerrounding,floatrounding,perfectnumber,rounding-integer-value,rounding-tenths-value,rounding-hundredths-value,rounding-thousandths-value
