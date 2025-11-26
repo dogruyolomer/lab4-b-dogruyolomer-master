@@ -8,9 +8,9 @@ c. roundToHundreths(number)
 d. roundToThousandths(number)
 */
 
-int roundToInteger(double num);
-double roundToTenths(double num);
-double roundToHundredths(double num);
-double roundToThousandths(double num);
+int roundToInteger(float num);
+float roundToTenths(float num);
+float roundToHundredths(float num);
+float roundToThousandths(float num);
 
 

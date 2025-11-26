@@ -7,21 +7,21 @@
 
 //INCLUDE YOUR FUNCTION DEFINITIONS HERE
 
-int roundToInteger(double num)
+int roundToInteger(float num)
 {
     return (int)floor(num + 0.5);
 }
 
-double roundToTenths(double num)
+float roundToTenths(float num)
 {
     return floor(num * 10.0 + 0.5) / 10.0;
 }
 
-double roundToHundredths(double num){
+float roundToHundredths(float num){
     return floor(num * 100.0 + 0.5) / 100.0;
 }
 
-double roundToThousandths(double num){
+float roundToThousandths(float num){
     return floor(num * 1000.0 + 0.5) / 1000.0;
 }
 
